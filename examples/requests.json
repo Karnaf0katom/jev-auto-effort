@@ -1,0 +1,11 @@
+[
+  {"id": "typo", "request": "Change teh to the in the supplied README sentence.", "expected": "low"},
+  {"id": "definition", "request": "Explain what a Python list is in one sentence.", "expected": "low"},
+  {"id": "rename", "request": "Rename the supplied local variable count to item_count in this one function.", "expected": "low"},
+  {"id": "pagination", "request": "Add pagination to a REST list endpoint using its documented contract and existing database query, then check boundary cases.", "expected": "medium"},
+  {"id": "validation", "request": "Implement a settings parser that validates three fields and returns useful errors for invalid values.", "expected": "medium"},
+  {"id": "comparison", "request": "Compare the two supplied API designs against the stated requirements and recommend one with its tradeoffs.", "expected": "medium"},
+  {"id": "race", "request": "Find the root cause of an intermittent lost-update race across two services and a queue. Reconcile conflicting logs and design a fix preserving idempotency under retries.", "expected": "high"},
+  {"id": "migration", "request": "Design a zero-downtime database migration while old and new clients run concurrently. Resolve ordering, rollback, and data consistency under partial failure.", "expected": "high"},
+  {"id": "proof", "request": "Prove the supplied distributed protocol preserves its invariant under adversarial message reordering, concurrent retries, and node failures, or construct a counterexample.", "expected": "high"}
+]

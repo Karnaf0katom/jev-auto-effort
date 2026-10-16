@@ -1,0 +1,50 @@
+[
+  {
+    "id": "input-mapping", "category": "lookup",
+    "summary": "Extract four explicitly supplied keyboard and controller mappings, preserving their exact numeric values.",
+    "request": "Extract the actions from these declarations. jump: keys 32 and 87, controller button 0. slide: keys 83 and 4194322, button 1. pause: key 4194305, button 6. mute: key 77, no controller button. Return a JSON object mapping each action to keys and buttons arrays.",
+    "expected": {"jump": {"keys": [32, 87], "buttons": [0]}, "slide": {"keys": [83, 4194322], "buttons": [1]}, "pause": {"keys": [4194305], "buttons": [6]}, "mute": {"keys": [77], "buttons": []}}
+  },
+  {
+    "id": "inventory-regression", "category": "lookup",
+    "summary": "Inspect an explicit directory tree, distinguish nonempty documentation folders from empty folders, and locate a nested Git checkout.",
+    "request": "The complete fixture tree contains projects/ops/OPERATIONS.md, projects/tools/widget/.git/HEAD, projects/tools/widget/main.py and the empty directory projects/music/. No other entries or symlinks exist. For each of the three first-level project directories return an object with name, empty (boolean), and git_roots (array of paths relative to projects). A Git root is the directory containing .git, which may be nested below a project. Sort rows by name.",
+    "expected": [{"name": "music", "empty": true, "git_roots": []}, {"name": "ops", "empty": false, "git_roots": []}, {"name": "tools", "empty": false, "git_roots": ["tools/widget"]}]
+  },
+  {
+    "id": "pagination", "category": "coding", "function": "paginate",
+    "summary": "Implement a small Python pagination function under an explicit validation and slicing contract, including boundary cases.",
+    "request": "Write only a Python function paginate(rows, page, size). Return the page slice as a list. page and size must be positive Python integers; bool, float, strings, zero and negatives raise ValueError. Pages beyond the end return an empty list. Do not modify rows. Return Python source, without Markdown fences. No imports or external dependencies.",
+    "expected_effort_hint": "medium"
+  },
+  {
+    "id": "merge-ranges", "category": "coding", "function": "merge_ranges",
+    "summary": "Implement interval merging with a clear sorting, validation and endpoint-touching contract.",
+    "request": "Write only a Python function merge_ranges(ranges). Each element is a two-element list or tuple [start,end] of Python integers (bool is invalid), with start <= end. Invalid elements raise ValueError. Return a sorted list of lists merging overlapping intervals and intervals touching at the same endpoint. Empty input returns []. Do not modify the input. Return Python source, without Markdown fences. No imports or external dependencies.",
+    "expected_effort_hint": "medium"
+  },
+  {
+    "id": "write-skew", "category": "diagnosis",
+    "summary": "Analyze concurrent READ COMMITTED transactions and determine which proposed synchronization protocols preserve the invariant.",
+    "request": "Two doctors A and B initially have on_call=true. At READ COMMITTED, each transaction first counts all on-call doctors; if count>1 it changes only its own row to false and commits. Both counts happen before either update. Identify the anomaly, final on-call count, and safe fixes: a=lock only own doctor row before counting; b=lock one common guard row before counting; c=SERIALIZABLE with aborted transactions retried from the beginning. Return JSON with anomaly as a lowercase two-word string, count as an integer, and safe as a sorted array of fix letters.",
+    "expected": {"anomaly": "write skew", "count": 0, "safe": ["b", "c"]}
+  },
+  {
+    "id": "retry-protocol", "category": "diagnosis",
+    "summary": "Analyze crash windows in a retried external side-effect protocol and select the fixes that guarantee one effect.",
+    "request": "A worker processes a retriable job: if local done=false, call an external increment service, then set local done=true. It crashes after the service commits but before the local flag write. The service supports a durable idempotency key when supplied. After retry, how many increments occur in the original protocol? Which changes guarantee exactly one increment for a job that eventually succeeds: a=set done=true before calling without a transaction spanning the remote effect; b=send the same stable job idempotency key on every service attempt; c=send a new random key on each attempt? Return JSON {increments: integer, safe: sorted array of letters}.",
+    "expected": {"increments": 2, "safe": ["b"]}
+  },
+  {
+    "id": "pagination-review", "category": "review",
+    "summary": "Review a supplied short pagination implementation against the exact contract and identify blocking lines with concrete counterexamples.",
+    "request": "Review this Python function. Contract: page,size are positive Python integers; bool is invalid; invalid values raise ValueError; page 1 begins at index 0. Source lines: 1 def paginate(rows,page,size): 2     if not isinstance(page,int) or not isinstance(size,int) or page<1 or size<1: raise ValueError() 3     start=page*size 4     return rows[start:start+size]. Return JSON with blocking_lines (sorted line numbers), bool_rejected (does this code reject True?), and first_page (actual result for rows=[0,1,2,3],page=1,size=2).",
+    "expected": {"blocking_lines": [2, 3], "bool_rejected": false, "first_page": [2, 3]}
+  },
+  {
+    "id": "evidence-review", "category": "review",
+    "summary": "Independently review whether an artifact's release claim follows from its supplied test and execution receipts.",
+    "request": "Review a release statement: 'The new engine implementation is delivered and verified on hardware.' Supplied evidence: 69 tests pass against unchanged existing code; the generated plan says planned_only=true and provider_calls=0; no engine execution, hardware run, or new product diff exists. Return JSON with supported (boolean), verdict (FIX or PASS), verified_new_engine (boolean), verified_hardware (boolean), and existing_tests_passed (integer).",
+    "expected": {"supported": false, "verdict": "FIX", "verified_new_engine": false, "verified_hardware": false, "existing_tests_passed": 69}
+  }
+]

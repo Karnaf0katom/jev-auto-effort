@@ -1,0 +1,9 @@
+include LICENSE README.md BUILD-SPEC.md THIRD_PARTY.md CONTRIBUTING.md export-manifest.json
+include .gitattributes .github/workflows/tests.yml
+recursive-include docs *.md
+recursive-include examples *.json *.py *.mjs
+recursive-include schemas *.json
+recursive-include tests *.py
+recursive-include scripts *.py
+recursive-include licenses *.txt
+recursive-include src/auto_effort/skills *.md

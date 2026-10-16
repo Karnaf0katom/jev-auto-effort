@@ -1,0 +1,813 @@
+{
+  "schema_version": 1,
+  "model": "gpt-6-luna",
+  "tasks_sha256": "3a3b4f2dbbad9f538288d3e3513be241fe02d617887c4bfac83dc6f4fb8869c5",
+  "implementation_sha256": "856a3a2dce0c245b8688716a0e556bebbd5de6403932072ec7d9b07f1e8f8950",
+  "implementation_manifest": {
+    "src/auto_effort/__init__.py": "308fa857d64b3f1073382a977e007febf59c784e79ae276bdcd5e1b034b14517",
+    "src/auto_effort/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "src/auto_effort/backends.py": "526cfb8a8c7e1d8b8b7b745e18bcbf77b426acc4824ac865b86a22d84e13f088",
+    "src/auto_effort/cli.py": "4e876f41d138fde5a63fb5726ef712dc68770cf3bbdb4db5b1eadfb8f2fff43e",
+    "src/auto_effort/context.py": "c23d11bac2c9ee4e466471a824556ad20baefe40c95da9cd76185805d1de7a03",
+    "src/auto_effort/controller.py": "feeb09b5fb20da839c8ff7acc7c7326753c4535e5b1c97ef8d8330a9377d6ee8",
+    "src/auto_effort/core.py": "5eb0a642c3c2256f0479c23970b8e0b3b4be4fb6655617415360adb5df273e9f",
+    "src/auto_effort/models.py": "99732f7b39147a183f0191cd63bda910406928e5a6be75c3053ed24653cb5bd9",
+    "src/auto_effort/profiles.py": "1a8d4470091b7f2791737373ea31d54dbb5bd748dc00d5f050e0a9194f1c8f0c",
+    "src/auto_effort/protocol.py": "b5527be7e57543779cd5ba39d5e8edd7b3e91a7a5739d96f8b6f3a0c9090a857",
+    "src/auto_effort/routing.py": "813c20c6ce67df3a6fae762df81b477ffe000cd6eea03f90204065459d617333",
+    "src/auto_effort/setup.py": "81b47b3cad0e0e29777415d4a488a8cdcd4179ab1d6c6d744e375e68fb438ee1",
+    "src/auto_effort/telemetry.py": "309a07f7fb1a836375e21a2a54fb020ff60eadecd19db31e45b862e024a5d34e"
+  },
+  "rows": [
+    {
+      "task_id": "input-mapping",
+      "category": "lookup",
+      "policy": "auto",
+      "attempt": 1,
+      "selection": {
+        "schema_version": 1,
+        "target": "worker",
+        "model": "gpt-6-luna",
+        "mode": "auto",
+        "apply_effort": true,
+        "reason": "unclassified_request",
+        "decision": {
+          "schema_version": 1,
+          "effort": "medium",
+          "source": "fallback",
+          "reason": "unclassified_request",
+          "confidence": 0.4,
+          "latency_ms": 1523.406,
+          "cost_usd": 2.3142e-05,
+          "proposed_effort": "other"
+        },
+        "settings": {},
+        "cli_args": [
+          "-c",
+          "model_reasoning_effort=\"medium\""
+        ],
+        "decision_id": "786d87b32db847e087508518c22cc704"
+      },
+      "request_sha256": "21045cef9a73d74c0818a540d92573fceae0ce5f5329e9b320f28ef828d08a7a",
+      "passed": true,
+      "usage": {
+        "input_tokens": 20053,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 77,
+        "reasoning_output_tokens": 0
+      },
+      "agent_cost_usd": null,
+      "exit_code": 0,
+      "tool_calls": 0,
+      "grading": {
+        "passed": true,
+        "checks": 1
+      },
+      "elapsed_ms": 11653.34
+    },
+    {
+      "task_id": "input-mapping",
+      "category": "lookup",
+      "policy": "medium",
+      "attempt": 1,
+      "selection": {
+        "schema_version": 1,
+        "target": "worker",
+        "model": "gpt-6-luna",
+        "mode": "auto",
+        "apply_effort": true,
+        "reason": "explicit_override",
+        "decision": {
+          "schema_version": 1,
+          "effort": "medium",
+          "source": "manual",
+          "reason": "explicit_override",
+          "confidence": null,
+          "latency_ms": 0.0,
+          "cost_usd": null
+        },
+        "settings": {},
+        "cli_args": [
+          "-c",
+          "model_reasoning_effort=\"medium\""
+        ],
+        "decision_id": "53a7f4c6180a4ee29c576c78c93d8673"
+      },
+      "request_sha256": "21045cef9a73d74c0818a540d92573fceae0ce5f5329e9b320f28ef828d08a7a",
+      "passed": true,
+      "usage": {
+        "input_tokens": 20053,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 77,
+        "reasoning_output_tokens": 0
+      },
+      "agent_cost_usd": null,
+      "exit_code": 0,
+      "tool_calls": 0,
+      "grading": {
+        "passed": true,
+        "checks": 1
+      },
+      "elapsed_ms": 15974.85
+    },
+    {
+      "task_id": "inventory-regression",
+      "category": "lookup",
+      "policy": "medium",
+      "attempt": 1,
+      "selection": {
+        "schema_version": 1,
+        "target": "worker",
+        "model": "gpt-6-luna",
+        "mode": "auto",
+        "apply_effort": true,
+        "reason": "explicit_override",
+        "decision": {
+          "schema_version": 1,
+          "effort": "medium",
+          "source": "manual",
+          "reason": "explicit_override",
+          "confidence": null,
+          "latency_ms": 0.0,
+          "cost_usd": null
+        },
+        "settings": {},
+        "cli_args": [
+          "-c",
+          "model_reasoning_effort=\"medium\""
+        ],
+        "decision_id": "7606235fbfb34659ae9f51a45547cb6c"
+      },
+      "request_sha256": "56290b538d3146551188567d031750e77683219394a5ce4104cfb101e775ccd7",
+      "passed": true,
+      "usage": {
+        "input_tokens": 20078,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 64,
+        "reasoning_output_tokens": 0
+      },
+      "agent_cost_usd": null,
+      "exit_code": 0,
+      "tool_calls": 0,
+      "grading": {
+        "passed": true,
+        "checks": 1
+      },
+      "elapsed_ms": 13077.878
+    },
+    {
+      "task_id": "inventory-regression",
+      "category": "lookup",
+      "policy": "auto",
+      "attempt": 1,
+      "selection": {
+        "schema_version": 1,
+        "target": "worker",
+        "model": "gpt-6-luna",
+        "mode": "auto",
+        "apply_effort": true,
+        "reason": "low_confidence",
+        "decision": {
+          "schema_version": 1,
+          "effort": "medium",
+          "source": "fallback",
+          "reason": "low_confidence",
+          "confidence": 0.72,
+          "latency_ms": 1025.905,
+          "cost_usd": 2.3478e-05,
+          "proposed_effort": "medium"
+        },
+        "settings": {},
+        "cli_args": [
+          "-c",
+          "model_reasoning_effort=\"medium\""
+        ],
+        "decision_id": "48c7a6894a144667925e24d2a3f9cc04"
+      },
+      "request_sha256": "56290b538d3146551188567d031750e77683219394a5ce4104cfb101e775ccd7",
+      "passed": true,
+      "usage": {
+        "input_tokens": 20078,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 64,
+        "reasoning_output_tokens": 0
+      },
+      "agent_cost_usd": null,
+      "exit_code": 0,
+      "tool_calls": 0,
+      "grading": {
+        "passed": true,
+        "checks": 1
+      },
+      "elapsed_ms": 14986.326
+    },
+    {
+      "task_id": "pagination",
+      "category": "coding",
+      "policy": "auto",
+      "attempt": 1,
+      "selection": {
+        "schema_version": 1,
+        "target": "worker",
+        "model": "gpt-6-luna",
+        "mode": "auto",
+        "apply_effort": true,
+        "reason": "task_complexity",
+        "decision": {
+          "schema_version": 1,
+          "effort": "medium",
+          "source": "jev",
+          "reason": "task_complexity",
+          "confidence": 0.95,
+          "latency_ms": 1480.747,
+          "cost_usd": 2.3268e-05,
+          "proposed_effort": "medium"
+        },
+        "settings": {},
+        "cli_args": [
+          "-c",
+          "model_reasoning_effort=\"medium\""
+        ],
+        "decision_id": "9d14cf4c553f4f87980fd1e7d6488c06"
+      },
+      "request_sha256": "3212f866791bf73af4191db49f01c4ddb43b17a9cd15dcc0ac2533c9c5ce574d",
+      "passed": true,
+      "usage": {
+        "input_tokens": 20194,
+        "cached_input_tokens": 7936,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 103,
+        "reasoning_output_tokens": 0
+      },
+      "agent_cost_usd": null,
+      "exit_code": 0,
+      "tool_calls": 0,
+      "grading": {
+        "passed": true,
+        "checks": 12
+      },
+      "elapsed_ms": 12677.9
+    },
+    {
+      "task_id": "pagination",
+      "category": "coding",
+      "policy": "medium",
+      "attempt": 1,
+      "selection": {
+        "schema_version": 1,
+        "target": "worker",
+        "model": "gpt-6-luna",
+        "mode": "auto",
+        "apply_effort": true,
+        "reason": "explicit_override",
+        "decision": {
+          "schema_version": 1,
+          "effort": "medium",
+          "source": "manual",
+          "reason": "explicit_override",
+          "confidence": null,
+          "latency_ms": 0.0,
+          "cost_usd": null
+        },
+        "settings": {},
+        "cli_args": [
+          "-c",
+          "model_reasoning_effort=\"medium\""
+        ],
+        "decision_id": "4251d75db80544ea8b1678b1ae0ced08"
+      },
+      "request_sha256": "3212f866791bf73af4191db49f01c4ddb43b17a9cd15dcc0ac2533c9c5ce574d",
+      "passed": true,
+      "usage": {
+        "input_tokens": 20052,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 103,
+        "reasoning_output_tokens": 0
+      },
+      "agent_cost_usd": null,
+      "exit_code": 0,
+      "tool_calls": 0,
+      "grading": {
+        "passed": true,
+        "checks": 12
+      },
+      "elapsed_ms": 12153.806
+    },
+    {
+      "task_id": "merge-ranges",
+      "category": "coding",
+      "policy": "medium",
+      "attempt": 1,
+      "selection": {
+        "schema_version": 1,
+        "target": "worker",
+        "model": "gpt-6-luna",
+        "mode": "auto",
+        "apply_effort": true,
+        "reason": "explicit_override",
+        "decision": {
+          "schema_version": 1,
+          "effort": "medium",
+          "source": "manual",
+          "reason": "explicit_override",
+          "confidence": null,
+          "latency_ms": 0.0,
+          "cost_usd": null
+        },
+        "settings": {},
+        "cli_args": [
+          "-c",
+          "model_reasoning_effort=\"medium\""
+        ],
+        "decision_id": "754e7163fc734c01915d2c39d073de63"
+      },
+      "request_sha256": "733ee3d229edfd80c238b82b04a1cd8eb3ff8e7f3d4475b0dadb4e89c760ff11",
+      "passed": true,
+      "usage": {
+        "input_tokens": 20065,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 215,
+        "reasoning_output_tokens": 0
+      },
+      "agent_cost_usd": null,
+      "exit_code": 0,
+      "tool_calls": 0,
+      "grading": {
+        "passed": true,
+        "checks": 11
+      },
+      "elapsed_ms": 13406.671
+    },
+    {
+      "task_id": "merge-ranges",
+      "category": "coding",
+      "policy": "auto",
+      "attempt": 1,
+      "selection": {
+        "schema_version": 1,
+        "target": "worker",
+        "model": "gpt-6-luna",
+        "mode": "auto",
+        "apply_effort": true,
+        "reason": "task_complexity",
+        "decision": {
+          "schema_version": 1,
+          "effort": "medium",
+          "source": "jev",
+          "reason": "task_complexity",
+          "confidence": 0.91,
+          "latency_ms": 813.148,
+          "cost_usd": 2.3184e-05,
+          "proposed_effort": "medium"
+        },
+        "settings": {},
+        "cli_args": [
+          "-c",
+          "model_reasoning_effort=\"medium\""
+        ],
+        "decision_id": "6572838890474104b47bfa63187f8b0f"
+      },
+      "request_sha256": "733ee3d229edfd80c238b82b04a1cd8eb3ff8e7f3d4475b0dadb4e89c760ff11",
+      "passed": true,
+      "usage": {
+        "input_tokens": 20065,
+        "cached_input_tokens": 19200,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 217,
+        "reasoning_output_tokens": 0
+      },
+      "agent_cost_usd": null,
+      "exit_code": 0,
+      "tool_calls": 0,
+      "grading": {
+        "passed": true,
+        "checks": 11
+      },
+      "elapsed_ms": 11875.555
+    },
+    {
+      "task_id": "write-skew",
+      "category": "diagnosis",
+      "policy": "auto",
+      "attempt": 1,
+      "selection": {
+        "schema_version": 1,
+        "target": "worker",
+        "model": "gpt-6-luna",
+        "mode": "auto",
+        "apply_effort": true,
+        "reason": "low_confidence",
+        "decision": {
+          "schema_version": 1,
+          "effort": "medium",
+          "source": "fallback",
+          "reason": "low_confidence",
+          "confidence": 0.49,
+          "latency_ms": 1396.525,
+          "cost_usd": 2.3268e-05,
+          "proposed_effort": "high"
+        },
+        "settings": {},
+        "cli_args": [
+          "-c",
+          "model_reasoning_effort=\"medium\""
+        ],
+        "decision_id": "ad6f20bb19d44553b2688eb40c355157"
+      },
+      "request_sha256": "5b83b5ef02d2d1acefe5a66cf496944bdc92cb6e73d17acf2b3c44c30f98bd0d",
+      "passed": true,
+      "usage": {
+        "input_tokens": 20245,
+        "cached_input_tokens": 12032,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 34,
+        "reasoning_output_tokens": 0
+      },
+      "agent_cost_usd": null,
+      "exit_code": 0,
+      "tool_calls": 0,
+      "grading": {
+        "passed": true,
+        "checks": 1
+      },
+      "elapsed_ms": 12878.169
+    },
+    {
+      "task_id": "write-skew",
+      "category": "diagnosis",
+      "policy": "medium",
+      "attempt": 1,
+      "selection": {
+        "schema_version": 1,
+        "target": "worker",
+        "model": "gpt-6-luna",
+        "mode": "auto",
+        "apply_effort": true,
+        "reason": "explicit_override",
+        "decision": {
+          "schema_version": 1,
+          "effort": "medium",
+          "source": "manual",
+          "reason": "explicit_override",
+          "confidence": null,
+          "latency_ms": 0.0,
+          "cost_usd": null
+        },
+        "settings": {},
+        "cli_args": [
+          "-c",
+          "model_reasoning_effort=\"medium\""
+        ],
+        "decision_id": "c7929ef3529c47ed923833973a75fd09"
+      },
+      "request_sha256": "5b83b5ef02d2d1acefe5a66cf496944bdc92cb6e73d17acf2b3c44c30f98bd0d",
+      "passed": true,
+      "usage": {
+        "input_tokens": 20245,
+        "cached_input_tokens": 19200,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 34,
+        "reasoning_output_tokens": 0
+      },
+      "agent_cost_usd": null,
+      "exit_code": 0,
+      "tool_calls": 0,
+      "grading": {
+        "passed": true,
+        "checks": 1
+      },
+      "elapsed_ms": 12606.8
+    },
+    {
+      "task_id": "retry-protocol",
+      "category": "diagnosis",
+      "policy": "medium",
+      "attempt": 1,
+      "selection": {
+        "schema_version": 1,
+        "target": "worker",
+        "model": "gpt-6-luna",
+        "mode": "auto",
+        "apply_effort": true,
+        "reason": "explicit_override",
+        "decision": {
+          "schema_version": 1,
+          "effort": "medium",
+          "source": "manual",
+          "reason": "explicit_override",
+          "confidence": null,
+          "latency_ms": 0.0,
+          "cost_usd": null
+        },
+        "settings": {},
+        "cli_args": [
+          "-c",
+          "model_reasoning_effort=\"medium\""
+        ],
+        "decision_id": "c48f9f352b3a46b28b8e616029f8d9a4"
+      },
+      "request_sha256": "eb6d2d3ebc0c812b2153fa1220fdc060b5c58f65aed6c78071deffae4125924c",
+      "passed": true,
+      "usage": {
+        "input_tokens": 20112,
+        "cached_input_tokens": 12032,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 26,
+        "reasoning_output_tokens": 0
+      },
+      "agent_cost_usd": null,
+      "exit_code": 0,
+      "tool_calls": 0,
+      "grading": {
+        "passed": true,
+        "checks": 1
+      },
+      "elapsed_ms": 13462.81
+    },
+    {
+      "task_id": "retry-protocol",
+      "category": "diagnosis",
+      "policy": "auto",
+      "attempt": 1,
+      "selection": {
+        "schema_version": 1,
+        "target": "worker",
+        "model": "gpt-6-luna",
+        "mode": "auto",
+        "apply_effort": true,
+        "reason": "low_confidence",
+        "decision": {
+          "schema_version": 1,
+          "effort": "medium",
+          "source": "fallback",
+          "reason": "low_confidence",
+          "confidence": 0.35,
+          "latency_ms": 1247.273,
+          "cost_usd": 2.3394e-05,
+          "proposed_effort": "high"
+        },
+        "settings": {},
+        "cli_args": [
+          "-c",
+          "model_reasoning_effort=\"medium\""
+        ],
+        "decision_id": "67f7646133214d9fa52ad0cc9bac2394"
+      },
+      "request_sha256": "eb6d2d3ebc0c812b2153fa1220fdc060b5c58f65aed6c78071deffae4125924c",
+      "passed": true,
+      "usage": {
+        "input_tokens": 20112,
+        "cached_input_tokens": 19200,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 26,
+        "reasoning_output_tokens": 0
+      },
+      "agent_cost_usd": null,
+      "exit_code": 0,
+      "tool_calls": 0,
+      "grading": {
+        "passed": true,
+        "checks": 1
+      },
+      "elapsed_ms": 15374.446
+    },
+    {
+      "task_id": "pagination-review",
+      "category": "review",
+      "policy": "auto",
+      "attempt": 1,
+      "selection": {
+        "schema_version": 1,
+        "target": "worker",
+        "model": "gpt-6-luna",
+        "mode": "auto",
+        "apply_effort": true,
+        "reason": "low_confidence",
+        "decision": {
+          "schema_version": 1,
+          "effort": "medium",
+          "source": "fallback",
+          "reason": "low_confidence",
+          "confidence": 0.48,
+          "latency_ms": 1308.019,
+          "cost_usd": 2.3436e-05,
+          "proposed_effort": "medium"
+        },
+        "settings": {},
+        "cli_args": [
+          "-c",
+          "model_reasoning_effort=\"medium\""
+        ],
+        "decision_id": "0e465db9d5fd4530aed848ed9003dfc9"
+      },
+      "request_sha256": "9fa3e6522591211e8cc95bea13a5048fcadf378c9ff9ad15027714d0fb692a0e",
+      "passed": true,
+      "usage": {
+        "input_tokens": 20116,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 38,
+        "reasoning_output_tokens": 0
+      },
+      "agent_cost_usd": null,
+      "exit_code": 0,
+      "tool_calls": 0,
+      "grading": {
+        "passed": true,
+        "checks": 1
+      },
+      "elapsed_ms": 16337.49
+    },
+    {
+      "task_id": "pagination-review",
+      "category": "review",
+      "policy": "medium",
+      "attempt": 1,
+      "selection": {
+        "schema_version": 1,
+        "target": "worker",
+        "model": "gpt-6-luna",
+        "mode": "auto",
+        "apply_effort": true,
+        "reason": "explicit_override",
+        "decision": {
+          "schema_version": 1,
+          "effort": "medium",
+          "source": "manual",
+          "reason": "explicit_override",
+          "confidence": null,
+          "latency_ms": 0.0,
+          "cost_usd": null
+        },
+        "settings": {},
+        "cli_args": [
+          "-c",
+          "model_reasoning_effort=\"medium\""
+        ],
+        "decision_id": "2466bd96d62740509285163f241ed0e4"
+      },
+      "request_sha256": "9fa3e6522591211e8cc95bea13a5048fcadf378c9ff9ad15027714d0fb692a0e",
+      "passed": true,
+      "usage": {
+        "input_tokens": 20116,
+        "cached_input_tokens": 19200,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 38,
+        "reasoning_output_tokens": 0
+      },
+      "agent_cost_usd": null,
+      "exit_code": 0,
+      "tool_calls": 0,
+      "grading": {
+        "passed": true,
+        "checks": 1
+      },
+      "elapsed_ms": 14826.067
+    },
+    {
+      "task_id": "evidence-review",
+      "category": "review",
+      "policy": "medium",
+      "attempt": 1,
+      "selection": {
+        "schema_version": 1,
+        "target": "worker",
+        "model": "gpt-6-luna",
+        "mode": "auto",
+        "apply_effort": true,
+        "reason": "explicit_override",
+        "decision": {
+          "schema_version": 1,
+          "effort": "medium",
+          "source": "manual",
+          "reason": "explicit_override",
+          "confidence": null,
+          "latency_ms": 0.0,
+          "cost_usd": null
+        },
+        "settings": {},
+        "cli_args": [
+          "-c",
+          "model_reasoning_effort=\"medium\""
+        ],
+        "decision_id": "a9bf20edc8094ca1888753f0f513ddd0"
+      },
+      "request_sha256": "1b3da8084eda21fa2f673d921de4c17a459686d5ed7c7bbf7a28253a4781be1d",
+      "passed": true,
+      "usage": {
+        "input_tokens": 20071,
+        "cached_input_tokens": 19200,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 43,
+        "reasoning_output_tokens": 0
+      },
+      "agent_cost_usd": null,
+      "exit_code": 0,
+      "tool_calls": 0,
+      "grading": {
+        "passed": true,
+        "checks": 1
+      },
+      "elapsed_ms": 13417.879
+    },
+    {
+      "task_id": "evidence-review",
+      "category": "review",
+      "policy": "auto",
+      "attempt": 1,
+      "selection": {
+        "schema_version": 1,
+        "target": "worker",
+        "model": "gpt-6-luna",
+        "mode": "auto",
+        "apply_effort": true,
+        "reason": "low_confidence",
+        "decision": {
+          "schema_version": 1,
+          "effort": "medium",
+          "source": "fallback",
+          "reason": "low_confidence",
+          "confidence": 0.37,
+          "latency_ms": 3885.204,
+          "cost_usd": 2.3352e-05,
+          "proposed_effort": "medium"
+        },
+        "settings": {},
+        "cli_args": [
+          "-c",
+          "model_reasoning_effort=\"medium\""
+        ],
+        "decision_id": "14b61edb105e493a9e50f1c49363bfd2"
+      },
+      "request_sha256": "1b3da8084eda21fa2f673d921de4c17a459686d5ed7c7bbf7a28253a4781be1d",
+      "passed": true,
+      "usage": {
+        "input_tokens": 20071,
+        "cached_input_tokens": 19200,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 43,
+        "reasoning_output_tokens": 0
+      },
+      "agent_cost_usd": null,
+      "exit_code": 0,
+      "tool_calls": 0,
+      "grading": {
+        "passed": true,
+        "checks": 1
+      },
+      "elapsed_ms": 18326.761
+    }
+  ],
+  "summary": {
+    "groups": [
+      {
+        "policy": "auto",
+        "attempts": 8,
+        "accepted_tasks": 8,
+        "failed_attempts": 0,
+        "efforts": {
+          "medium": 8
+        },
+        "effort_sources": {
+          "fallback": 6,
+          "jev": 2
+        },
+        "elapsed_ms": 114109.987,
+        "judge_ms": 12680.227,
+        "known_judge_cost_usd": 0.00018652199999999997,
+        "input_tokens": 160934,
+        "cached_input_tokens": 77568,
+        "output_tokens": 602,
+        "usage_samples": 8,
+        "agent_cost_usd": null
+      },
+      {
+        "policy": "medium",
+        "attempts": 8,
+        "accepted_tasks": 8,
+        "failed_attempts": 0,
+        "efforts": {
+          "medium": 8
+        },
+        "effort_sources": {
+          "manual": 8
+        },
+        "elapsed_ms": 108926.761,
+        "judge_ms": 0.0,
+        "known_judge_cost_usd": 0,
+        "input_tokens": 160792,
+        "cached_input_tokens": 69632,
+        "output_tokens": 600,
+        "usage_samples": 8,
+        "agent_cost_usd": null
+      }
+    ],
+    "note": "Paired public smoke benchmark; cached inputs, fixed execution order and a small sample limit inference. Agent dollars are not reported by Codex and remain unknown."
+  }
+}

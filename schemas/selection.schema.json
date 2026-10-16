@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Auto Effort controller selection v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "target", "model", "mode", "apply_effort", "reason", "decision", "settings", "cli_args"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "decision_id": {"type": "string", "pattern": "^[a-f0-9]{32}$"},
+    "target": {"type": "string"},
+    "model": {"type": "string"},
+    "mode": {"enum": ["off", "shadow", "auto"]},
+    "apply_effort": {"type": "boolean"},
+    "reason": {"type": "string"},
+    "decision": {"anyOf": [{"$ref": "decision.schema.json"}, {"type": "null"}]},
+    "settings": {"type": "object"},
+    "cli_args": {"type": "array", "items": {"type": "string"}}
+  }
+}
