@@ -1,5 +1,24 @@
 # Validation record
 
+## Release candidate 0.4.0a2 — 2026-10-18
+
+The [six-job platform check](https://github.com/Karnaf0katom/jev-auto-effort/actions/runs/39129801523)
+passed on Python 3.10 and 3.13 across Linux, macOS and Windows. Each Linux and
+macOS job passed 299 tests. Each Windows job passed 294 tests and skipped five
+POSIX-only launch/terminal tests. All six jobs verified a clean wheel installation,
+the Python/CLI protocols, the Node 22 controller, bundled attribution, and
+byte-for-byte wheel reproduction from the source distribution within that job.
+
+The uploaded release manifests were checked against the exact 63-file source
+export, and their wheel/source-archive SHA-256 values were verified. This platform
+run checks the implementation before this documentation update; the release
+workflow checks the final release source again. Artifact hashes and retained logs
+are available with that workflow and the prerelease assets.
+
+These installation and regression checks do not establish downstream agent task
+quality or cost savings. The routing evaluation below remains a synthetic,
+partly development-set result. This release retains experimental alpha status.
+
 ## Pre-publication routing evaluation — 2026-10-18
 
 The [recorded evaluation](../examples/file_effort_evaluation-20261018.json)
@@ -181,7 +200,8 @@ routing boundary. Installation does not intercept native `spawn_agent` calls or
 rejudge every existing conversation turn. The optional adapter retains a resolved
 launch selection until an explicit change or a new host selection.
 
-Runtime validation currently covers Linux. Run platform CI before claiming cross-platform support. Before
+Runtime checks cover Python 3.10 and 3.13 on Linux, macOS and Windows, with the
+five POSIX-only Windows exclusions recorded above. Before
 recommending Auto as an efficiency improvement, evaluate held-out project tasks,
 repeat the fixed-effort comparison, retain complete failed-attempt and repair
 chains, and measure or explicitly estimate agent costs. The current smoke check
