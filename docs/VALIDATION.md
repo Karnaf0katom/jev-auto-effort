@@ -1,5 +1,62 @@
 # Validation record
 
+## Pre-publication routing evaluation — 2026-10-18
+
+The [recorded evaluation](../examples/file_effort_evaluation-20261018.json)
+retains all 76 provider judgments across two phases. Expectations were assigned
+before calls using the documented rubric. These are synthetic request descriptions;
+no large file was processed and no downstream agent task was executed.
+
+The initial 32 new cases matched 27 expected levels. Four filename/path detection
+gaps (HTML, CSS, binary and relative SCSS) caused medium instead of high. One
+routine file task conservatively received high. Detection now handles common web
+formats, relative paths with arbitrary suffixes, and bare filenames with unknown
+suffixes. The confidence threshold remains 0.8.
+
+The second phase rejudged all 32 cases and 12 fresh follow-up cases:
+
+| Expected effort | Matched | Other applied effort |
+|---|---:|---|
+| Low | 15/15 | None |
+| Medium | 5/6 | One high fallback |
+| High | 23/23 | None |
+| Total | 43/44 | One conservative overestimate |
+
+The 12 follow-up cases matched 12/12. The remaining mismatch proposed medium at
+0.79 confidence, below the 0.8 guard, so the file fallback stayed high. The first
+32 cases became development data when used to fix detection. The labels reflect
+a maintainer rubric, not measured optimal difficulty. Recorded answers were
+applied through the real policy; replay time is not live client latency. These
+results do not establish downstream quality, cost savings or general accuracy.
+
+## File scope guard development check (0.4.0a1) — 2026-10-18
+
+Unknown file work now defaults to high within the target's supported effort
+ladder. An exact edit, named-field lookup or small described section may still
+receive lower effort when both the effort and bounded-scope answers meet the
+configured confidence threshold. Both questions use one judge call. Hosts can
+mark attachments absent from the request text with `has_files`; the selector
+does not open referenced files.
+
+The complete package test suite passed: **285 tests** in a Linux portable test snapshot. Tests
+cover missing/malformed scope judgments, privacy and input limits, provider
+failures, supported effort ladders, manual overrides, controller modes, JSON
+input, CLI launch settings and file-only requests. The test recipe now includes
+the existing Node `.mjs` examples required by the export manifest.
+
+The [six recorded development cases](../examples/file_effort_smoke.json) use
+synthetic public requests and actual Jev answers. Offline replays apply the
+expected effort in all six cases: low for an exact replacement, a named-field
+lookup and a concrete short reference; high for a filename alone, vague file
+work and concurrency diagnosis. An initial live pass was too conservative for
+two small tasks. The revised instructions explicitly accept a concrete context
+description as evidence of bounded scope; the confidence floor remains 0.8.
+
+These prompts were used while tuning the instructions. The replays check policy
+against recorded answers, not future judge reliability. This is not held-out
+quality or cost evidence. At this earlier check, a new wheel/source-archive
+release gate and the cross-platform CI matrix had not been run.
+
 ## Experimental candidate 0.4.0a1 — 2026-10-15
 
 This candidate adds preserved launch settings in the optional host adapter,
@@ -20,7 +77,7 @@ to each group as if they were separate work.
 The owning validation environment is Linux. The prepared standalone workflow
 covers Python 3.10 and 3.13 on Linux, macOS and Windows; those six CI jobs have
 not run. Linux checks and Python syntax compatibility do not establish Windows
-or macOS runtime support. Nothing has been published.
+or macOS runtime support. Nothing had been published at the time of that check.
 
 The separate optional CCC adapter passed 67 focused tests covering launch
 binding, explicit overrides, fast and resumed follow-ups, handoff lineage,

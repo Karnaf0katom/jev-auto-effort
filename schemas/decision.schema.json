@@ -9,7 +9,7 @@
     "decision_id": {"type": "string", "pattern": "^[a-f0-9]{32}$"},
     "effort": {"enum": ["none", "minimal", "low", "medium", "high", "xhigh", "max", "ultra"]},
     "source": {"enum": ["jev", "manual", "fallback"]},
-    "reason": {"enum": ["task_complexity", "explicit_override", "private_request", "input_too_large", "credential_detected", "judge_unavailable", "invalid_judgment", "unclassified_request", "low_confidence", "no_task_context", "inherited_selection"]},
+    "reason": {"enum": ["task_complexity", "explicit_override", "private_request", "input_too_large", "credential_detected", "judge_unavailable", "invalid_judgment", "unclassified_request", "low_confidence", "no_task_context", "file_scope_unknown", "inherited_selection"]},
     "proposed_effort": {"enum": ["none", "minimal", "low", "medium", "high", "xhigh", "max", "ultra", "other"]},
     "confidence": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
     "latency_ms": {"type": "number", "minimum": 0},

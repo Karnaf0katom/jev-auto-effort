@@ -5,7 +5,7 @@ that model. `route` is the separate boundary for a bounded helper: choose a
 declared model target, then choose its supported effort. A controller must call
 these boundaries; installation does not intercept native helper tools.
 
-Version 0.4.0a1 also supports inspecting a selection and inheriting it into a
+The controller also supports inspecting a selection and inheriting it into a
 distinct continuation. The resolved launch setting is retained until an explicit
 user change or a new host selection. Inherited settings do not make another
 judge call and are labeled `inherited_selection`, with `parent_decision_id`

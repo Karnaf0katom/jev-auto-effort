@@ -9,7 +9,7 @@ from .controller import AgentController
 from .telemetry import TraceContext
 
 MAX_LINE_CHARS = 65_536
-FIELDS = {"id", "target", "request", "context", "previous_reply", "current_effort", "effort", "private", "mode", "trace"}
+FIELDS = {"id", "target", "request", "context", "previous_reply", "current_effort", "effort", "private", "mode", "trace", "has_files"}
 
 
 def handle(controller: AgentController, message: object) -> dict:

@@ -138,7 +138,7 @@ class DecisionLedger:
         record = {
             "schema_version": 1, "decision_id": identity,
             "created_at": datetime.now(timezone.utc).isoformat(),
-            "policy_version": POLICY_VERSION, "implementation_version": "0.4.0a1",
+            "policy_version": POLICY_VERSION, "implementation_version": "0.4.0a2",
             "trace": asdict(trace or TraceContext()),
             "model": model, "model_source": model_source, "target": target,
             "adapter": adapter, "mode": mode, "dry_run": dry_run,

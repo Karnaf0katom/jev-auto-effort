@@ -31,6 +31,16 @@ The host supplies `current_effort` on each call if it wants uncertain judgments
 to retain its current setting. Each request is judged independently; a subagent
 uses its own target and current effort. Auto Effort does not start another agent.
 
+For file uploads or other attachments, pass `has_files=True` to `select()` or
+`EffortRouter.pick()` when their presence is not apparent from the text. The judge
+cannot open those files. Unestablished scope defaults to high within the target's
+supported efforts, including on private/oversized input or judge failure. A
+concrete short `context` describing an exact edit or known small section can
+justify lower effort; the same call asks for a confident bounded-scope judgment.
+An attachment with no accompanying text can use `request="", has_files=True`;
+it receives the file fallback without a judge call. An explicit effort still wins,
+and off/shadow modes retain their usual apply behavior.
+
 ## Controllers in any language
 
 Start one process for the lifetime of a controller connection:
@@ -43,6 +53,12 @@ Send one JSON object per stdin line. A response is flushed to stdout for each li
 
 ```json
 {"id":"turn-1","target":"default","request":"Continue","previous_reply":"We will investigate the transaction race and verify the fix","current_effort":"medium"}
+```
+
+The optional `has_files` field must be a JSON boolean. For example:
+
+```json
+{"id":"file-turn","request":"Replace teh with the","context":"Only that literal replacement in the uploaded note","has_files":true}
 ```
 
 The response contains `id` and either `result` or `error`. `result` uses the

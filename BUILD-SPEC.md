@@ -1,6 +1,6 @@
 # Auto Effort architecture and release scope
 
-Version 0.4.0a1 is an experimental standalone Python package and CLI. It selects
+Version 0.4.0a2 is an experimental standalone Python package and CLI. It selects
 reasoning effort at an explicit host request boundary. A separate helper router
 selects from caller-declared model targets; the main model remains the user's
 choice.
@@ -10,6 +10,10 @@ choice.
 - One typed Jev Choice applies only supported efforts. The confidence guard is
   at least 0.8. Uncertain, unavailable, private or unsupported requests retain
   the documented current setting or fallback. Explicit choices bypass Jev.
+- Unseen file work raises the automatic fallback to high within the declared
+  effort ladder. File hints come from the request or a host-supplied boolean;
+  the selector does not open attachments. A second typed choice in the same
+  call must confidently establish bounded scope before lower effort is applied.
 - Python and JSON Lines controllers return an effort patch. CLI launch adapters
   preserve the original task input and the host's permissions and authentication.
 - The local SQLite ledger records selections, model choices, launch receipts,

@@ -124,7 +124,7 @@ def discover_codex_models(command: str = "codex", timeout: float = 15) -> tuple[
         raise ValueError("Codex model discovery failed; supply --model and --levels explicitly")
 
     try:
-        call("initialize", {"clientInfo": {"name": "auto_effort", "version": "0.4.0a1"}})
+        call("initialize", {"clientInfo": {"name": "auto_effort", "version": "0.4.0a2"}})
         send("initialized", {})
         rows: list[dict[str, Any]] = []
         cursor = None

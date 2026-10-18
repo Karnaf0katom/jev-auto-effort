@@ -68,7 +68,7 @@ class SubagentRouter:
         reason = "private_request" if private else "input_too_large" if sum(map(len, texts)) > 12_000 else "credential_detected" if any(_CREDENTIAL.search(text) for text in texts) else None
         if reason:
             return ModelChoice(fallback, "fallback", reason)
-        if is_go_ahead(request) and not context.strip():
+        if (is_go_ahead(request) or not request.strip()) and not context.strip():
             return ModelChoice(fallback, "fallback", "no_task_context")
         criteria = {name: f"Role: {route['role']}. {route['criteria']}" for name, route in self.routes.items()}
         criteria["other"] = "Insufficient context or no declared target is a safe fit."
@@ -97,10 +97,10 @@ class SubagentRouter:
             return ModelChoice(fallback, "fallback", "unclassified_request" if choice == "other" else "low_confidence", float(confidence), latency, cost)
         return ModelChoice(choice, "jev", "task_fit", float(confidence), latency, cost)
 
-    def select(self, request: str, *, context: str = "", private: bool = False, target: str | None = None, current_target: str | None = None, current_effort: str | None = None, effort: str = "auto", mode: str | None = None, trace: TraceContext | None = None, dry_run: bool = False) -> RoutedSelection:
+    def select(self, request: str, *, context: str = "", private: bool = False, target: str | None = None, current_target: str | None = None, current_effort: str | None = None, effort: str = "auto", mode: str | None = None, trace: TraceContext | None = None, dry_run: bool = False, has_files: bool = False) -> RoutedSelection:
         mode = self.config.mode if mode is None else mode
         baseline = current_target or self.config.default_target
-        if not isinstance(request, str) or not request.strip() or not isinstance(context, str) or not isinstance(private, bool):
+        if not isinstance(has_files, bool) or not isinstance(request, str) or not (request.strip() or has_files) or not isinstance(context, str) or not isinstance(private, bool):
             raise ValueError("invalid routing request")
         if mode not in ("off", "shadow", "auto") or baseline not in self.routes:
             raise ValueError("invalid routing mode or current target")
@@ -122,6 +122,7 @@ class SubagentRouter:
             current_effort=current_effort if actual_target == baseline else None,
             mode=mode, trace=replace(trace or TraceContext(), role=self.routes[actual_target]["role"]), dry_run=dry_run,
             model_source=choice.source if actual_target == choice.target else "caller",
+            has_files=has_files,
         )
         if self.ledger:
             self.ledger.record_model_choice(selected.decision_id, asdict(choice), baseline_target=baseline)

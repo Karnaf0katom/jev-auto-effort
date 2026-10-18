@@ -1,0 +1,113 @@
+{
+  "note": "Development smoke cases and recorded Jev answers, 2026-10-18. These are prompt-tuning examples, not held-out quality or cost evidence.",
+  "model": "typesafe/jev-1.13-20260917",
+  "cases": [
+    {
+      "id": "file-alone",
+      "request": "report.pdf",
+      "expected": "high",
+      "judgment": {
+        "answers": {
+          "effort": {
+            "choice": "other",
+            "confidence": 0.81
+          },
+          "file_scope": {
+            "choice": "other",
+            "confidence": 0.46
+          }
+        }
+      }
+    },
+    {
+      "id": "vague-file-work",
+      "request": "Read this huge file and think for yourself",
+      "has_files": true,
+      "expected": "high",
+      "judgment": {
+        "answers": {
+          "effort": {
+            "choice": "high",
+            "confidence": 0.56
+          },
+          "file_scope": {
+            "choice": "unknown",
+            "confidence": 0.92
+          }
+        }
+      }
+    },
+    {
+      "id": "exact-edit",
+      "request": "Replace the literal 'teh' with 'the' in huge-report.md",
+      "context": "Only this exact replacement; no review or other edits.",
+      "expected": "low",
+      "judgment": {
+        "answers": {
+          "effort": {
+            "choice": "low",
+            "confidence": 1
+          },
+          "file_scope": {
+            "choice": "bounded",
+            "confidence": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "located-lookup",
+      "request": "Read settings.json and return only the value at app.display_name",
+      "expected": "low",
+      "judgment": {
+        "answers": {
+          "effort": {
+            "choice": "low",
+            "confidence": 1
+          },
+          "file_scope": {
+            "choice": "bounded",
+            "confidence": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "small-reference",
+      "request": "Make the change",
+      "has_files": true,
+      "context": "The uploaded three-line note contains the literal 'helllo'. Change only that literal to 'hello'.",
+      "expected": "low",
+      "judgment": {
+        "answers": {
+          "effort": {
+            "choice": "low",
+            "confidence": 1
+          },
+          "file_scope": {
+            "choice": "bounded",
+            "confidence": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "file-diagnosis",
+      "request": "Find why this file loses writes under concurrency and design a safe fix",
+      "has_files": true,
+      "expected": "high",
+      "judgment": {
+        "answers": {
+          "effort": {
+            "choice": "high",
+            "confidence": 0.91
+          },
+          "file_scope": {
+            "choice": "unknown",
+            "confidence": 0.97
+          }
+        }
+      }
+    }
+  ]
+}

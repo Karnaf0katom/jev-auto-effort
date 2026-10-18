@@ -41,6 +41,7 @@ def _options(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--request-file", type=Path, help="read a UTF-8 request from a file; default: stdin")
     parser.add_argument("--context", default="", help="optional task summary sent to Jev")
     parser.add_argument("--previous-reply", default="", help="optional bounded reply or plan being answered")
+    parser.add_argument("--has-files", action="store_true", help="task includes files or attachments; no file contents are opened or uploaded")
     parser.add_argument("--backend", choices=("typesafe", "openrouter", "jev-cli"), default="typesafe")
     parser.add_argument("--jev-command", default="jev", help="path to an existing jev CLI")
     parser.add_argument("--judge-model", help="judge model; default is pinned for the selected backend")
@@ -73,12 +74,13 @@ def _pick(args: argparse.Namespace, request: str) -> Decision:
     return EffortRouter(backend, policy).pick(
         request, context=args.context, previous_reply=args.previous_reply, current_effort=args.current,
         effort=args.effort, private=args.private,
+        has_files=args.has_files,
     )
 
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="auto-effort", description=__doc__)
-    parser.add_argument("--version", action="version", version="auto-effort 0.4.0a1")
+    parser.add_argument("--version", action="version", version="auto-effort 0.4.0a2")
     sub = parser.add_subparsers(dest="command", required=True)
     sub.add_parser("instructions", help="emit the bundled CCC auto-subagents skill as JSON")
     pick = sub.add_parser("pick", help="choose effort and return JSON or a setting")
@@ -146,6 +148,7 @@ def main(argv: list[str] | None = None) -> int:
     select.add_argument("--target")
     select.add_argument("--context", default="")
     select.add_argument("--previous-reply", default="")
+    select.add_argument("--has-files", action="store_true")
     select.add_argument("--current")
     select.add_argument("--effort", default="auto")
     select.add_argument("--mode", choices=("off", "shadow", "auto"))
@@ -160,6 +163,7 @@ def main(argv: list[str] | None = None) -> int:
     route.add_argument("--target", help="explicit declared target; bypass automatic model selection")
     route.add_argument("--current-target")
     route.add_argument("--context", default="")
+    route.add_argument("--has-files", action="store_true")
     route.add_argument("--current")
     route.add_argument("--effort", default="auto")
     route.add_argument("--mode", choices=("off", "shadow", "auto"))
@@ -296,6 +300,7 @@ def main(argv: list[str] | None = None) -> int:
                 request, context=args.context, private=args.private, target=args.target,
                 current_target=args.current_target, current_effort=args.current,
                 effort=args.effort, mode=args.mode, trace=trace, dry_run=args.dry_run,
+                has_files=args.has_files,
             )
             print(json.dumps(result.to_dict(), allow_nan=False))
             return 0
@@ -303,6 +308,7 @@ def main(argv: list[str] | None = None) -> int:
             selection = AgentController(Config.load(args.config), ledger=ledger).select(
                 request, target=args.target, context=args.context, previous_reply=args.previous_reply,
                 current_effort=args.current, effort=args.effort, private=args.private, mode=args.mode, trace=trace, dry_run=args.dry_run,
+                has_files=args.has_files,
             )
             print(json.dumps(selection.to_dict(), allow_nan=False))
             return 0
@@ -326,6 +332,7 @@ def main(argv: list[str] | None = None) -> int:
                     request, target=args.target, context=args.context, previous_reply=args.previous_reply,
                     current_effort=args.current, effort=args.effort, private=args.private, mode=args.mode,
                     trace=trace, dry_run=args.dry_run,
+                    has_files=args.has_files,
                 )
                 model, adapter, native_args = selected.target.model, selected.target.adapter, selected.cli_args
                 report = selected.to_dict()

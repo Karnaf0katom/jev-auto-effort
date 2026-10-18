@@ -74,6 +74,7 @@ class AgentController:
         self, request: str, *, target: str | None = None, context: str = "",
         previous_reply: str = "", current_effort: str | None = None,
         effort: str = "auto", private: bool = False, mode: str | None = None,
+        has_files: bool = False,
         trace: TraceContext | None = None, dry_run: bool = False, model_source: str = "caller",
     ) -> Selection:
         if trace is not None and not isinstance(trace, TraceContext):
@@ -85,6 +86,7 @@ class AgentController:
         selection = self._select(
             request, target=target, context=context, previous_reply=previous_reply,
             current_effort=current_effort, effort=effort, private=private, mode=mode,
+            has_files=has_files,
         )
         if self.ledger is None:
             return selection
@@ -102,6 +104,7 @@ class AgentController:
         self, request: str, *, target: str | None = None, context: str = "",
         previous_reply: str = "", current_effort: str | None = None,
         effort: str = "auto", private: bool = False, mode: str | None = None,
+        has_files: bool = False,
     ) -> Selection:
         name = target or self.config.default_target
         if name not in self.config.targets:
@@ -112,7 +115,9 @@ class AgentController:
             raise ValueError("mode must be off, shadow, or auto")
         if not isinstance(private, bool):
             raise ValueError("private must be a boolean")
-        if not isinstance(request, str) or not request.strip():
+        if not isinstance(has_files, bool):
+            raise ValueError("has_files must be a boolean")
+        if not isinstance(request, str) or not (request.strip() or has_files):
             raise ValueError("request must be a nonempty string")
         if selected.adapter == "disabled":
             if effort != "auto":
@@ -122,11 +127,12 @@ class AgentController:
         router = EffortRouter(self.decider, policy)
         if effort == "auto" and mode == "off":
             # Validate the baseline without a judge call, then leave the host untouched.
-            router.pick(request, context=context, previous_reply=previous_reply, current_effort=current_effort, effort=current_effort or selected.fallback)
+            router.pick(request, context=context, previous_reply=previous_reply, current_effort=current_effort, effort=current_effort or selected.fallback, has_files=has_files)
             return Selection(name, selected, mode, None, False, "router_off", {}, [])
         decision = router.pick(
             request, context=context, previous_reply=previous_reply,
             current_effort=current_effort, effort=effort, private=private,
+            has_files=has_files,
         )
         applied = effort != "auto" or mode == "auto"
         settings, args = selected.patch(decision.effort) if applied else ({}, [])

@@ -142,7 +142,7 @@ check:
 ```bash
 python -m pip install '.[dev]'
 python -m build
-python scripts/check_install.py --wheel dist/jev_auto_effort-0.4.0a1-py3-none-any.whl
+python scripts/check_install.py --wheel dist/jev_auto_effort-0.4.0a2-py3-none-any.whl
 ```
 
 The check creates and removes a temporary environment, installs the wheel without

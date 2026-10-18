@@ -1,11 +1,11 @@
 # Auto Effort
 
-Choose an agent's reasoning effort from the request it is about to handle. Jev makes
-one typed classification; a small policy decides whether to apply it. The same
+Choose an agent's reasoning effort from the request it is about to handle. Jev judges
+the task in one call; a small policy decides whether to apply it. The same
 decision works in a Python agent, a command-line launcher, or another tool that
 can read JSON.
 
-**Status: experimental alpha candidate, version 0.4.0a1.** MIT licensed. The distribution name is
+**Status: experimental alpha candidate, version 0.4.0a2.** MIT licensed. The distribution name is
 `jev-auto-effort`, the Python import is `auto_effort`, and the CLI is `auto-effort`.
 This package has not been published to a package registry. An optional local CCC
 adapter is under validation; it requires this package to be installed separately.
@@ -68,6 +68,44 @@ automatically. Confidence below 0.8, an `other` answer, or a provider failure re
 `--current`, if supplied, otherwise `--fallback` (default `medium`). Explicit
 `--effort high` takes precedence and skips Jev. Higher levels become candidates
 only when the caller includes them in `--levels`.
+
+## File-based tasks
+
+The judge cannot open a referenced file. A short request such as "review this file"
+may hide substantial work, so file tasks default to **high** until their scope is
+established. The policy uses the first permitted level at or above high, or the
+highest permitted level if high is unavailable, and retains a higher fallback.
+It never adds an unsupported effort.
+
+Recognizable filenames, paths and attachment wording provide file hints. Hosts
+should set `has_files=True` (CLI: `--has-files`) for attachments absent from the
+request text. The flag adds no file contents to the judge request; referenced paths
+are never opened automatically. `--request-file` reads the prompt itself and does not
+implicitly mark the task as attachment work.
+
+A concrete instruction or short context summary can still justify low effort:
+
+```bash
+auto-effort pick 'Review the attached report' --has-files
+auto-effort pick 'Replace the literal teh with the in report.md' \
+  --context 'Only this exact replacement; no review or other edits.'
+```
+
+File requests add a second typed choice in the same judge call. Both the effort
+and a bounded-scope answer must meet the configured confidence threshold before
+the policy applies lower effort. Exact mechanical edits, known local lookups and
+work confined to a small described section can qualify. "Read the file and think
+for yourself" does not establish bounded scope. Missing or uncertain scope uses
+the file default, with `file_scope_unknown` when it overrides a lower proposal.
+Private, oversized and unavailable-judge file tasks also use that conservative
+fallback. Explicit effort settings still win.
+
+A pre-labelled synthetic check initially matched 27/32 expected efforts and
+exposed four filename-detection gaps. After fixing detection, a rerun plus 12 new
+cases matched 43/44: all 23 expected-high and all 15 expected-low cases matched;
+one routine case conservatively received high. This measures request routing,
+with no downstream task-quality or savings claim. See the
+[recorded evaluation](examples/file_effort_evaluation-20261018.json).
 
 ## Install from source
 
@@ -208,19 +246,23 @@ decision = router.pick("Fix the requested bug", current_effort="medium")
 ```
 
 The backend must return `{"answers": {"effort": {"choice": "low", "confidence": 0.9}}}`,
-optionally with `usage.cost`. Custom backends own their timeouts and privacy handling.
+optionally with `usage.cost`. For file tasks, it also receives a `file_scope` question.
+Lower effort requires `answers.file_scope` with `choice: "bounded"` and confidence
+at or above the configured threshold. Missing scope keeps the file default.
+Custom backends own their timeouts and privacy handling.
 The official SDK adapter disables retries and uses its per-operation timeout;
 the CLI adapter enforces a subprocess timeout. This alpha has no caching or
 background worker and makes one decision call per eligible request.
 
 ## Input and privacy
 
-Only the incoming request, an optional caller-supplied context summary, and an optional
-previous reply go to the judge. There is no repository scan or automatic transcript upload. `private=True`
+Only the incoming request, an optional caller-supplied context summary, an optional
+previous reply and a file-presence hint go to the judge. There is no repository scan or automatic transcript upload. `private=True`
 or `--private` skips the judge entirely. A small preflight check also skips recognizable
 credentials. It is not a comprehensive secret scanner; callers decide what may be
 sent to the configured hosted provider. More than 12,000 combined request/context/previous-reply
-characters uses fallback rather than silently truncating the task.
+characters uses fallback rather than silently truncating the task. File tasks raise
+that fallback to the supported file default described above.
 
 The effort decision does not grant permissions, change the user's selected model, or authorize tools.
 Jev's confidence is not proof of task quality. [Related work and the evaluation

@@ -1,6 +1,7 @@
 # Experimental alpha release
 
-The candidate is `jev-auto-effort==0.4.0a1`. Publication is a separate owner
+The candidate is `jev-auto-effort==0.4.0a2`. The GitHub prerelease `v0.4.0a1`
+already exists; the updated candidate gets a new version and tag. Publication is a separate owner
 action after the exact source and artifacts have been checked. Source and binary
 artifacts are MIT licensed with the bundled attribution; optional host adapters
 are not included in the distribution.
@@ -77,7 +78,13 @@ schemas and the public validation limitations. Document the exact supported host
 boundary: CLI launch selection and explicit controller/helper routing. Installation
 does not automatically intercept native `spawn_agent` calls or every model request.
 
-After review, the owner chooses the publication repository and package-registry
-destination, approves the exact artifact hashes, and performs publication under
-the destination's normal authorization. Nothing in the check scripts pushes,
-tags, creates releases or uploads packages.
+For this candidate, review the exported source and artifact hashes, then push the
+standalone source to `Karnaf0katom/jev-auto-effort`. Let all six configured CI jobs
+pass (Python 3.10/3.13 on Linux, macOS and Windows), including the clean-install
+Node controller check, before tagging `v0.4.0a2` as a prerelease. A
+`node_controller: not_available` result means that check remains unexecuted.
+Retain the experimental alpha status: the routing evaluation does not establish
+downstream task quality or agent cost savings.
+
+A package-registry upload is a separate publication action. Nothing in the
+check scripts pushes, tags, creates releases or uploads packages.
